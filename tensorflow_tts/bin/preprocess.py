@@ -37,6 +37,7 @@ from tensorflow_tts.processor import LibriTTSProcessor
 from tensorflow_tts.processor import ThorstenProcessor
 from tensorflow_tts.processor import LJSpeechUltimateProcessor
 from tensorflow_tts.processor import SynpaflexProcessor
+from tensorflow_tts.processor import AmharicProcessor
 from tensorflow_tts.processor.ljspeech import LJSPEECH_SYMBOLS
 from tensorflow_tts.processor.baker import BAKER_SYMBOLS
 from tensorflow_tts.processor.kss import KSS_SYMBOLS
@@ -44,6 +45,7 @@ from tensorflow_tts.processor.libritts import LIBRITTS_SYMBOLS
 from tensorflow_tts.processor.thorsten import THORSTEN_SYMBOLS
 from tensorflow_tts.processor.ljspeechu import LJSPEECH_U_SYMBOLS
 from tensorflow_tts.processor.synpaflex import SYNPAFLEX_SYMBOLS
+from tensorflow_tts.processor.amharic import AMHARIC_SYMBOLS
 
 from tensorflow_tts.utils import remove_outlier
 
@@ -74,7 +76,7 @@ def parse_and_config():
         "--dataset",
         type=str,
         default="ljspeech",
-        choices=["ljspeech", "kss", "libritts", "baker", "thorsten", "ljspeechu", "synpaflex"],
+        choices=["ljspeech", "kss", "libritts", "baker", "thorsten", "ljspeechu", "synpaflex", "amharic"],
         help="Dataset to preprocess.",
     )
     parser.add_argument(
@@ -357,6 +359,7 @@ def preprocess():
         "thorsten": ThorstenProcessor,
         "ljspeechu" : LJSpeechUltimateProcessor,
         "synpaflex": SynpaflexProcessor,
+        "amharic": AmharicProcessor,
     }
 
     dataset_symbol = {
@@ -367,6 +370,7 @@ def preprocess():
         "thorsten": THORSTEN_SYMBOLS,
         "ljspeechu": LJSPEECH_U_SYMBOLS,
         "synpaflex": SYNPAFLEX_SYMBOLS,
+        "amharic": AMHARIC_SYMBOLS,
     }
 
     dataset_cleaner = {
@@ -377,6 +381,7 @@ def preprocess():
         "thorsten": "german_cleaners",
         "ljspeechu": "english_cleaners",
         "synpaflex": "basic_cleaners",
+        "amharic": "basic_cleaners",
     }
 
     logging.info(f"Selected '{config['dataset']}' processor.")
