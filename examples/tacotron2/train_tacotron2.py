@@ -88,7 +88,7 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
             
             checkpoint = "file:{}".format(self.saved_path + "model-{}.h5".format(self.steps))
             backup = os.environ["DBFS_CHECKPOINT"]
-            logger.info("Backing up checkpoint {} to {}".format(checkpoint, backup))
+            logging.info("Backing up checkpoint {} to {}".format(checkpoint, backup))
             spark = SparkSession.builder.getOrCreate()
             dbutils = DBUtils(spark)
             dbutils.fs.cp(checkpoint, backup, True)
@@ -448,7 +448,7 @@ def main():
     # Update from env var. 
     for key, value in config.items() :
         if key in os.environ: 
-            logger.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
+            logging.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
             config.update({ key: os.environ[key]})
     
     for key, value in config.items():
