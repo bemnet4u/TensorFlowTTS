@@ -300,7 +300,11 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
             plt.tight_layout()
             plt.savefig(figname)
             plt.close()
-
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
 
 def main():
     """Run training process."""
@@ -449,7 +453,7 @@ def main():
     for key, value in config.items() :
         if key in os.environ: 
             logging.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
-            config.update({ key: os.environ[key]})
+            config.update({ key: num(os.environ[key])})
     
     for key, value in config.items():
         logging.info(f"{key} = {value}")
