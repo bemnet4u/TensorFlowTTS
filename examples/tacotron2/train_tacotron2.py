@@ -444,11 +444,13 @@ def main():
 
     with open(os.path.join(args.outdir, "config.yml"), "w") as f:
         yaml.dump(config, f, Dumper=yaml.Dumper)
+    
     # Update from env var. 
-    for key, value in config.items():
+    for key, value in config.items() :
         if key in os.environ: 
             logger.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
-            config.update({ key: os.environ[key]}
+            config.update({ key: os.environ[key]})
+    
     for key, value in config.items():
         logging.info(f"{key} = {value}")
 
