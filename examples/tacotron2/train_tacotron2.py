@@ -89,7 +89,10 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
             checkpoint = "file:{}".format(self.saved_path + "model-{}.h5".format(self.steps))
             backup = os.environ["DBFS_CHECKPOINT"]
             logging.info("Backing up checkpoint {} to {}".format(checkpoint, backup))
-            spark = SparkSession.builder.getOrCreate()
+            spark = SparkSession.builder
+                .config("spark.master", "local[*, 4]")
+                .config("spark.databricks.cluster.profile", "singleNode")
+                .getOrCreate()
             dbutils = DBUtils(spark)
             dbutils.fs.cp(checkpoint, backup, True)
 
