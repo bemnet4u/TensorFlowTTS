@@ -898,10 +898,10 @@ class Seq2SeqBasedTrainer(BasedTrainer, metaclass=abc.ABCMeta):
                 # save intermedia
                 self.generate_and_save_intermediate_result(batch)
 
-        logging.info(
-            f"(Steps: {self.steps}) Finished evaluation "
-            f"({eval_steps_per_epoch} steps per epoch)."
-        )
+            logging.info(
+                f"(Steps: {self.steps}) Finished evaluation "
+                f"({eval_steps_per_epoch} steps per epoch)."
+            )
 
         # average loss
         for key in self.eval_metrics.keys():
