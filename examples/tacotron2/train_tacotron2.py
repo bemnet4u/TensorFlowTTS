@@ -38,6 +38,8 @@ from tensorflow_tts.models import TFTacotron2
 from tensorflow_tts.optimizers import AdamWeightDecay, WarmUp
 from tensorflow_tts.trainers import Seq2SeqBasedTrainer
 from tensorflow_tts.utils import calculate_2d_loss, calculate_3d_loss, return_strategy
+from pyspark.sql import SparkSession
+from pyspark.dbutils import DBUtils
 
 
 class Tacotron2Trainer(Seq2SeqBasedTrainer):
@@ -79,6 +81,17 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
         self.reset_states_eval()
 
         self.config = config
+
+    def save_checkpoint(self):
+            """Save checkpoint."""
+            super().save_checkpoint()
+            
+            checkpoint = "file:{}".format(self.saved_path + "model-{}.h5".format(self.steps))
+            backup = os.environ["DBFS_CHECKPOINT"]
+            logger.info("Backing up checkpoint {} to {}".format(checkpoint, backup))
+            spark = SparkSession.builder.getOrCreate()
+            dbutils = DBUtils(spark)
+            dbutils.fs.cp(checkpoint, backup, True)
 
     def compile(self, model, optimizer):
         super().compile(model, optimizer)
