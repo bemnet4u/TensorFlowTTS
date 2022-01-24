@@ -38,6 +38,8 @@ from tensorflow_tts.models import TFTacotron2
 from tensorflow_tts.optimizers import AdamWeightDecay, WarmUp
 from tensorflow_tts.trainers import Seq2SeqBasedTrainer
 from tensorflow_tts.utils import calculate_2d_loss, calculate_3d_loss, return_strategy
+from pyspark.sql import SparkSession
+from pyspark.dbutils import DBUtils
 
 
 class Tacotron2Trainer(Seq2SeqBasedTrainer):
@@ -79,6 +81,17 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
         self.reset_states_eval()
 
         self.config = config
+
+    def save_checkpoint(self):
+            """Save checkpoint."""
+            super().save_checkpoint()
+            
+            checkpoint = "file:{}".format(self.saved_path + "model-{}.h5".format(self.steps))
+            backup = os.environ["DBFS_CHECKPOINT"]
+            logging.info("Backing up checkpoint {} to {}".format(checkpoint, backup))
+            spark = SparkSession.builder.config("spark.master", "local[*, 4]").config("spark.databricks.cluster.profile", "singleNode").getOrCreate()
+            dbutils = DBUtils(spark)
+            dbutils.fs.cp(checkpoint, backup, True)
 
     def compile(self, model, optimizer):
         super().compile(model, optimizer)
@@ -287,7 +300,11 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
             plt.tight_layout()
             plt.savefig(figname)
             plt.close()
-
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
 
 def main(args=None):
     """Run training process."""
@@ -431,6 +448,13 @@ def main(args=None):
 
     with open(os.path.join(args.outdir, "config.yml"), "w") as f:
         yaml.dump(config, f, Dumper=yaml.Dumper)
+    
+    # Update from env var. 
+    for key, value in config.items() :
+        if key in os.environ: 
+            logging.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
+            config.update({ key: num(os.environ[key])})
+    
     for key, value in config.items():
         logging.info(f"{key} = {value}")
 
