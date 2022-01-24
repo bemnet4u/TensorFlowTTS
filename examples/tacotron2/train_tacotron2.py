@@ -289,7 +289,7 @@ class Tacotron2Trainer(Seq2SeqBasedTrainer):
             plt.close()
 
 
-def main():
+def main(args=None):
     """Run training process."""
     parser = argparse.ArgumentParser(
         description="Train FastSpeech (See detail in tensorflow_tts/bin/train-fastspeech.py)"
@@ -347,7 +347,7 @@ def main():
         type=int,
         help="Use forced alignment guided attention loss or regular",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
 
     # return strategy
     STRATEGY = return_strategy()

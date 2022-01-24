@@ -79,7 +79,7 @@ setup(
     long_description=open(os.path.join(dirname, "README.md"), encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     license="Apache-2.0",
-    packages=find_packages(include=["tensorflow_tts*"]),
+    packages=find_packages(include=["tensorflow_tts*", "examples*"]),
     install_requires=install_requires,
     setup_requires=setup_requires,
     tests_require=tests_require,
