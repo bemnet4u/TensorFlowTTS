@@ -50,6 +50,13 @@ from tensorflow_tts.utils import calculate_2d_loss, calculate_3d_loss, return_st
 from pyspark.sql import SparkSession
 from pyspark.dbutils import DBUtils
 
+
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
+        
 class MultiBandMelganTrainer(MelganTrainer):
     """Multi-Band MelGAN Trainer class based on MelganTrainer."""
 
@@ -394,7 +401,7 @@ def main(args=None):
         if key in os.environ: 
             logging.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
             config.update({ key: num(os.environ[key])})
-            
+
     for key, value in config.items():
         logging.info(f"{key} = {value}")
 
