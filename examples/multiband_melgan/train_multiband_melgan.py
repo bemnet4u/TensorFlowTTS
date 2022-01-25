@@ -279,7 +279,7 @@ class MultiBandMelganTrainer(MelganTrainer):
             )
 
 
-def main():
+def main(args=None):
     """Run training process."""
     parser = argparse.ArgumentParser(
         description="Train MultiBand MelGAN (See detail in examples/multiband_melgan/train_multiband_melgan.py)"
@@ -337,7 +337,7 @@ def main():
         nargs="?",
         help="path of .h5 mb-melgan generator to load weights from",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(args=args)
 
     # return strategy
     STRATEGY = return_strategy()
