@@ -389,6 +389,12 @@ def main(args=None):
     config["version"] = tensorflow_tts.__version__
     with open(os.path.join(args.outdir, "config.yml"), "w") as f:
         yaml.dump(config, f, Dumper=yaml.Dumper)
+    
+    for key, value in config.items() :
+        if key in os.environ: 
+            logging.info("Updating {} from {} to {}".format(key, value, os.environ[key]))
+            config.update({ key: num(os.environ[key])})
+            
     for key, value in config.items():
         logging.info(f"{key} = {value}")
 
