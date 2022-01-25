@@ -51,12 +51,7 @@ from pyspark.sql import SparkSession
 from pyspark.dbutils import DBUtils
 
 
-def num(s):
-    try:
-        return int(s)
-    except ValueError:
-        return float(s)
-        
+       
 class MultiBandMelganTrainer(MelganTrainer):
     """Multi-Band MelGAN Trainer class based on MelganTrainer."""
 
@@ -284,7 +279,11 @@ class MultiBandMelganTrainer(MelganTrainer):
                 self.config["sampling_rate"],
                 "PCM_16",
             )
-
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return float(s)
 
 def main(args=None):
     """Run training process."""
