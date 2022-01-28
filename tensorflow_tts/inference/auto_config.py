@@ -80,7 +80,8 @@ class AutoConfig:
             config_class = config_class(**config[model_type + "_params"], **kwargs)
             config_class.set_config_params(config)
             return config_class
-        except Exception:
+        except Exception as ex:
+            print(ex)
             raise ValueError(
                 "Unrecognized config in {}. "
                 "Should have a `model_type` key in its config.yaml, or contain one of the following strings "
