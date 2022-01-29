@@ -52,6 +52,7 @@ class TFReflectionPad1d(tf.keras.layers.Layer):
         Returns:
             Tensor: Padded tensor (B, T + 2 * padding_size, C).
         """
+        print("x={}, padding_size={}, padding_type={}".format(x, self.padding_size, self.padding_type))
         return tf.pad(
             x,
             [[0, 0], [self.padding_size, self.padding_size], [0, 0]],
