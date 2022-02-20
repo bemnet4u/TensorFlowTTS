@@ -16,13 +16,19 @@
 
 
 from tensorflow_tts.configs import BaseConfig
+from tensorflow_tts.processor.jsut import JSUT_SYMBOLS
 from tensorflow_tts.processor.ljspeech import LJSPEECH_SYMBOLS as lj_symbols
 from tensorflow_tts.processor.kss import KSS_SYMBOLS as kss_symbols
 from tensorflow_tts.processor.baker import BAKER_SYMBOLS as bk_symbols
 from tensorflow_tts.processor.libritts import LIBRITTS_SYMBOLS as lbri_symbols
 from tensorflow_tts.processor.ljspeechu import LJSPEECH_U_SYMBOLS as lju_symbols
 from tensorflow_tts.processor.synpaflex import SYNPAFLEX_SYMBOLS as synpaflex_symbols
+<<<<<<< HEAD
 from tensorflow_tts.processor.amharic import AMHARIC_SYMBOLS as amharic_symbols
+=======
+from tensorflow_tts.processor.jsut import JSUT_SYMBOLS as jsut_symbols
+
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
 
 class Tacotron2Config(BaseConfig):
     """Initialize Tacotron-2 Config."""
@@ -72,8 +78,13 @@ class Tacotron2Config(BaseConfig):
             self.vocab_size = len(lju_symbols)
         elif dataset == "synpaflex":
             self.vocab_size = len(synpaflex_symbols)
+<<<<<<< HEAD
         elif dataset == "amharic":
             self.vocab_size = len(amharic_symbols)        
+=======
+        elif dataset == "jsut":
+            self.vocab_size = len(jsut_symbols)
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
         else:
             raise ValueError("No such dataset: {}".format(dataset))
         self.embedding_hidden_size = embedding_hidden_size

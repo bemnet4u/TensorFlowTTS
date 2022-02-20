@@ -27,7 +27,11 @@ from tensorflow_tts.processor import (
     ThorstenProcessor,
     LJSpeechUltimateProcessor,
     SynpaflexProcessor,
+<<<<<<< HEAD
     AmharicProcessor
+=======
+    JSUTProcessor,
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
 )
 
 from tensorflow_tts.utils import CACHE_DIRECTORY, PROCESSOR_FILE_NAME, LIBRARY_NAME
@@ -43,7 +47,11 @@ CONFIG_MAPPING = OrderedDict(
         ("ThorstenProcessor", ThorstenProcessor),
         ("LJSpeechUltimateProcessor", LJSpeechUltimateProcessor),
         ("SynpaflexProcessor", SynpaflexProcessor),
+<<<<<<< HEAD
         ("AmharicProcessor", AmharicProcessor)
+=======
+        ("JSUTProcessor", JSUTProcessor),
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
     ]
 )
 

@@ -42,6 +42,7 @@ dump_ljspeech/
 dump_kss/
 dump_libritts/
 /notebooks/test_saved/
+<<<<<<< HEAD
 bin/
 lib/
 share/
@@ -49,3 +50,7 @@ lib64
 pyvenv.cfg
 dump/
 log.txt
+=======
+build/
+dist/
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e

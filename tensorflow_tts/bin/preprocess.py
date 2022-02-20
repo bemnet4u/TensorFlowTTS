@@ -37,7 +37,11 @@ from tensorflow_tts.processor import LibriTTSProcessor
 from tensorflow_tts.processor import ThorstenProcessor
 from tensorflow_tts.processor import LJSpeechUltimateProcessor
 from tensorflow_tts.processor import SynpaflexProcessor
+<<<<<<< HEAD
 from tensorflow_tts.processor import AmharicProcessor
+=======
+from tensorflow_tts.processor import JSUTProcessor
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
 from tensorflow_tts.processor.ljspeech import LJSPEECH_SYMBOLS
 from tensorflow_tts.processor.baker import BAKER_SYMBOLS
 from tensorflow_tts.processor.kss import KSS_SYMBOLS
@@ -45,7 +49,11 @@ from tensorflow_tts.processor.libritts import LIBRITTS_SYMBOLS
 from tensorflow_tts.processor.thorsten import THORSTEN_SYMBOLS
 from tensorflow_tts.processor.ljspeechu import LJSPEECH_U_SYMBOLS
 from tensorflow_tts.processor.synpaflex import SYNPAFLEX_SYMBOLS
+<<<<<<< HEAD
 from tensorflow_tts.processor.amharic import AMHARIC_SYMBOLS
+=======
+from tensorflow_tts.processor.jsut import JSUT_SYMBOLS
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
 
 from tensorflow_tts.utils import remove_outlier
 
@@ -76,7 +84,11 @@ def parse_and_config():
         "--dataset",
         type=str,
         default="ljspeech",
+<<<<<<< HEAD
         choices=["ljspeech", "kss", "libritts", "baker", "thorsten", "ljspeechu", "synpaflex", "amharic"],
+=======
+        choices=["ljspeech", "kss", "libritts", "baker", "thorsten", "ljspeechu", "synpaflex", "jsut"],
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
         help="Dataset to preprocess.",
     )
     parser.add_argument(
@@ -357,9 +369,13 @@ def preprocess():
         "libritts": LibriTTSProcessor,
         "baker": BakerProcessor,
         "thorsten": ThorstenProcessor,
-        "ljspeechu" : LJSpeechUltimateProcessor,
+        "ljspeechu": LJSpeechUltimateProcessor,
         "synpaflex": SynpaflexProcessor,
+<<<<<<< HEAD
         "amharic": AmharicProcessor,
+=======
+        "jsut": JSUTProcessor,
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
     }
 
     dataset_symbol = {
@@ -370,7 +386,11 @@ def preprocess():
         "thorsten": THORSTEN_SYMBOLS,
         "ljspeechu": LJSPEECH_U_SYMBOLS,
         "synpaflex": SYNPAFLEX_SYMBOLS,
+<<<<<<< HEAD
         "amharic": AMHARIC_SYMBOLS,
+=======
+        "jsut": JSUT_SYMBOLS,
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
     }
 
     dataset_cleaner = {
@@ -381,7 +401,11 @@ def preprocess():
         "thorsten": "german_cleaners",
         "ljspeechu": "english_cleaners",
         "synpaflex": "basic_cleaners",
+<<<<<<< HEAD
         "amharic": "basic_cleaners",
+=======
+        "jsut": None,
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
     }
 
     logging.info(f"Selected '{config['dataset']}' processor.")
@@ -582,3 +606,7 @@ def compute_statistics():
     logging.info("Saving computed statistics.")
     scaler_list = [(scaler_mel, ""), (scaler_energy, "_energy"), (scaler_f0, "_f0")]
     save_statistics_to_file(scaler_list, config)
+
+
+if __name__ == "__main__":
+    preprocess()

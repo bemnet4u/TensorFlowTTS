@@ -7,4 +7,8 @@ from tensorflow_tts.processor.libritts import LibriTTSProcessor
 from tensorflow_tts.processor.thorsten import ThorstenProcessor
 from tensorflow_tts.processor.ljspeechu import LJSpeechUltimateProcessor
 from tensorflow_tts.processor.synpaflex import SynpaflexProcessor
+<<<<<<< HEAD
 from tensorflow_tts.processor.amharic import AmharicProcessor
+=======
+from tensorflow_tts.processor.jsut import JSUTProcessor
+>>>>>>> ab6efe4573e4567898535bb7557a2944354cf67e
