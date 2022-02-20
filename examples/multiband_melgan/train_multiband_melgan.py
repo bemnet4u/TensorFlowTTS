@@ -47,8 +47,6 @@ from tensorflow_tts.models import (
     TFMelGANMultiScaleDiscriminator,
 )
 from tensorflow_tts.utils import calculate_2d_loss, calculate_3d_loss, return_strategy
-from pyspark.sql import SparkSession
-from pyspark.dbutils import DBUtils
 
 
        
@@ -99,23 +97,6 @@ class MultiBandMelganTrainer(MelganTrainer):
         self.init_train_eval_metrics(self.list_metrics_name)
         self.reset_states_train()
         self.reset_states_eval()
-
-    def save_checkpoint(self):
-        """Save checkpoint."""
-        super().save_checkpoint()
-        
-        spark = SparkSession.builder.config("spark.master", "local[*, 4]").config("spark.databricks.cluster.profile", "singleNode").getOrCreate()
-        dbutils = DBUtils(spark)
-
-        backup = os.environ["DBFS_CHECKPOINT"]
-        save_weights = "file:" + self.saved_path + "generator-{}.h5".format(self.steps)
-        discrimnator = "file:" +  self.saved_path + "discriminator-{}.h5".format(self.steps)
-
-        logging.info("Melgan Backing up checkpoint {} to {}".format(save_weights, backup))        
-        dbutils.fs.cp(save_weights, backup, True)
-
-        logging.info("Melgan Backing up checkpoint {} to {}".format(discrimnator, backup))        
-        dbutils.fs.cp(discrimnator, backup, True)
         
     def compile(self, gen_model, dis_model, gen_optimizer, dis_optimizer, pqmf):
         super().compile(gen_model, dis_model, gen_optimizer, dis_optimizer)
