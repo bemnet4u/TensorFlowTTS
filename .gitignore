@@ -44,3 +44,9 @@ dump_libritts/
 /notebooks/test_saved/
 build/
 dist/
+bin/
+lib/
+share/
+lib64
+pyvenv.cfg
+dump/
